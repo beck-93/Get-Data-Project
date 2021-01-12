@@ -1,7 +1,8 @@
 Code Book for final meandat data set:
-
-V1...562 Subject
-V1...563 Activity
+Filtered by | Labels
+------------|--------
+V1...562 | Subject
+V1...563 | Activity
 
 Original data set contained a 561-feature vector with time and frequency domain variables, filtered down to mean and standardard deviation columns:
 Standard Deviation | Columns
