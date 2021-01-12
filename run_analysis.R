@@ -44,5 +44,12 @@ extracteddf <- mergeddf[,c(1,2,3,4,5,6,41,42,43,44,46,81,82,83,84,85,86,121,122,
 #Describe the activity names in the data set
 library(plyr)
 print(activity$text)
+
+#label the data set with descriptive variable names
 extracteddf$V1...563 <- mapvalues(extracteddf$V1...563, from = (1:6), to = c("Walking", "Walking_Upstairs", "Walking_Downstairs", "Sitting", "Standing", "Laying"))
 print(extracteddf$V1...563)
+
+#create a second, independent tidy data set with the average of each variable for each activity and each subject.
+meandat <- extracteddf %>%
+  group_by(V1...562, V1...563) %>%
+  summarise_all(funs(mean))
