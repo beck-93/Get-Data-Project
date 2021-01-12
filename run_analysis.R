@@ -21,3 +21,28 @@ X_train <- read.table("X_train.txt")
 Y_train <- read.table("y_train.txt")
 features <- read.table("features.txt")
 
+#combine folders into a data frame
+testdf <- cbind(X_text, testsubjects, Y_test)
+traindf <- cbind(X_train, trainsubjects, Y_train)
+
+#merge the training and test data sets
+mergeddf <- bind_rows(traindf, testdf)
+
+
+#examine the features table to determine which rows contain mean or std
+library(dplyr)
+features %>%
+  select(V1, V2) %>%
+  filter(grepl(pattern = "mean", tolower(V2)))
+features %>%
+  select(V1, V2) %>%
+  filter(grepl(pattern = "std", tolower(V2)))
+
+#Extracts only the measurements on the mean and standard deviation for each measurement. 
+extracteddf <- mergeddf[,c(1,2,3,4,5,6,41,42,43,44,46,81,82,83,84,85,86,121,122,123,124,125,126,161,162,163,164,165,166,201,202,214,215,227,228,240,241,253,254,266,267,269,270,271,268,294,295,296,345,346,347,348,349,350,373,374,375,424,425,427,428,429,452,453,454,503,504,513,516,517,526,529,530,539,542,543,552,555,556,557,558,559,560,561,562,563)]
+
+#Describe the activity names in the data set
+library(plyr)
+print(activity$text)
+extracteddf$V1...563 <- mapvalues(extracteddf$V1...563, from = (1:6), to = c("Walking", "Walking_Upstairs", "Walking_Downstairs", "Sitting", "Standing", "Laying"))
+print(extracteddf$V1...563)
