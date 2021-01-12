@@ -50,6 +50,8 @@ extracteddf$V1...563 <- mapvalues(extracteddf$V1...563, from = (1:6), to = c("Wa
 print(extracteddf$V1...563)
 
 #create a second, independent tidy data set with the average of each variable for each activity and each subject.
+dim(extracteddf)
 meandat <- extracteddf %>%
   group_by(V1...562, V1...563) %>%
-  summarise_all(funs(mean))
+  summarise_at(vars(1:84), list(name = mean))
+write.table(meandat, "meandat.txt", row.names = F)
